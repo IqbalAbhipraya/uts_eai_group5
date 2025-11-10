@@ -22,9 +22,11 @@ testDbConnection();
 // routes
 const studentRoutes = require('./routes/student.routes');
 const courseRoutes = require('./routes/course.routes');
+const gradeRoutes = require('./routes/grade.routes');
 
 app.use('/api/v1/student', studentRoutes);
 app.use('/api/v1/course', courseRoutes);
+app.use('/api/v1/grade', gradeRoutes);
 
 app.get('/', (req,res) => {
     res.send('Hello World');
