@@ -1,164 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Student-Course Management</title>
-	<link rel="stylesheet" href="./styles.css" />
-</head>
-<body>
-	<header>
-		<h1>Student, Course, Enrollment, and Grade Management</h1>
-	</header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student-Course Management</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./navbar.css" />
+    <style>
+      /* Integration Styles */
+      .main-content {
+        margin-top: 70px !important;
+        padding-top: 20px !important;
+      }
 
-	<main class="container">
-		<section class="card">
-			<h2>Students</h2>
-			<form id="student-form" class="form">
-				<input type="hidden" id="student-id" />
-				<div class="row">
-					<label for="student-name">Name</label>
-					<input type="text" id="student-name" placeholder="Student name" required />
-				</div>
-				<div class="row">
-					<label for="student-email">Email</label>
-					<input type="text" id="student-email" placeholder="student@example.com" required />
-				</div>
-				<div class="row">
-					<label for="student-password">Password</label>
-					<input type="password" id="student-password" placeholder="123" required />
-				</div>
-				<div class="row actions">
-					<button type="submit" id="student-submit">Add Student</button>
-					<button type="button" id="student-cancel" class="secondary">Cancel</button>
-				</div>
-			</form>
+      .sidebar-toggle {
+        z-index: 1002 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 🚀 NAVBAR COMPONENT - Otomatis Load! -->
+    <div id="navbar-placeholder"></div>
 
-			<div class="list-actions">
-				<button id="refresh-students" class="secondary">Refresh</button>
-			</div>
-			<table class="table" id="students-table">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-		</section>
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <header>
+        <h1>Student, Course, Enrollment, and Grade Management</h1>
+      </header>
 
-		<section class="card">
-			<h2>Courses</h2>
-			<form id="course-form" class="form">
-				<input type="hidden" id="course-id" />
-				<div class="row">
-					<label for="course-title">Title</label>
-					<input type="text" id="course-title" placeholder="Course name" required />
-				</div>
-				<div class="row">
-					<label for="course-instructor">Instructor</label>
-					<input type="text" id="course-instructor" placeholder="e.g. CS101" required />
-				</div>
-				<div class="row actions">
-					<button type="submit" id="course-submit">Add Course</button>
-					<button type="button" id="course-cancel" class="secondary">Cancel</button>
-				</div>
-			</form>
+      <main class="container">
+        <section class="card">
+          <h2>Students</h2>
+          <form id="student-form" class="form">
+            <input type="hidden" id="student-id" />
+            <div class="row">
+              <label for="student-name">Name</label>
+              <input
+                type="text"
+                id="student-name"
+                placeholder="Student name"
+                required
+              />
+            </div>
+            <div class="row">
+              <label for="student-email">Email</label>
+              <input
+                type="text"
+                id="student-email"
+                placeholder="student@example.com"
+                required
+              />
+            </div>
+            <div class="row">
+              <label for="student-password">Password</label>
+              <input
+                type="password"
+                id="student-password"
+                placeholder="123"
+                required
+              />
+            </div>
+            <div class="row actions">
+              <button type="submit" id="student-submit">Add Student</button>
+              <button type="button" id="student-cancel" class="secondary">
+                Cancel
+              </button>
+            </div>
+          </form>
 
-			<div class="list-actions">
-				<button id="refresh-courses" class="secondary">Refresh</button>
-			</div>
-			<table class="table" id="courses-table">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>Code</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-		</section>
+          <div class="list-actions">
+            <button id="refresh-students" class="secondary">Refresh</button>
+          </div>
+          <table class="table" id="students-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
 
-		<section class="card">
-			<h2>Enrollment</h2>
-			<form id="enroll-form" class="form">
-				<div class="row">
-					<label for="enroll-course">Course</label>
-					<select id="enroll-course"></select>
-				</div>
-				<div class="row">
-					<label for="enroll-student">Student</label>
-					<select id="enroll-student"></select>
-				</div>
-				<div class="row actions">
-					<button type="submit">Enroll Student</button>
-				</div>
-			</form>
+        <section class="card">
+          <h2>Courses</h2>
+          <form id="course-form" class="form">
+            <input type="hidden" id="course-id" />
+            <div class="row">
+              <label for="course-title">Title</label>
+              <input
+                type="text"
+                id="course-title"
+                placeholder="Course name"
+                required
+              />
+            </div>
+            <div class="row">
+              <label for="course-instructor">Instructor</label>
+              <input
+                type="text"
+                id="course-instructor"
+                placeholder="e.g. CS101"
+                required
+              />
+            </div>
+            <div class="row actions">
+              <button type="submit" id="course-submit">Add Course</button>
+              <button type="button" id="course-cancel" class="secondary">
+                Cancel
+              </button>
+            </div>
+          </form>
 
-			<div class="row">
-				<label for="enrolled-course">View enrolled students for course</label>
-				<select id="enrolled-course"></select>
-				<button id="load-enrolled" class="secondary">Load</button>
-			</div>
-			<table class="table" id="enrolled-table">
-				<thead>
-					<tr>
-						<th>Enrollment ID</th>
-						<th>Student ID</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-		</section>
+          <div class="list-actions">
+            <button id="refresh-courses" class="secondary">Refresh</button>
+          </div>
+          <table class="table" id="courses-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
 
-		<section class="card">
-			<h2>Grade Student</h2>
-			<form id="grade-form" class="form">
-				<div class="row">
-					<label for="grade-course">Course</label>
-					<select id="grade-course"></select>
-				</div>
-				<div class="row">
-					<label for="grade-student">Student</label>
-					<select id="grade-student"></select>
-				</div>
-				<div class="row">
-					<label for="grade-value">Grade</label>
-					<input type="text" id="grade-value" placeholder="e.g. A, B+, 90" required />
-				</div>
-				<div class="row actions">
-					<button type="submit" id="load-grade">Submit Grade</button>
-				</div>
-			</form>
-			<table class="table" id="grade-table">
-				<thead>
-					<tr>
-						<th>Student Name</th>
-						<th>Student Email</th>
-						<th>Grade</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-		</section>
-	</main>
+        <section class="card">
+          <h2>Enrollment</h2>
+          <form id="enroll-form" class="form">
+            <div class="row">
+              <label for="enroll-course">Course</label>
+              <select id="enroll-course"></select>
+            </div>
+            <div class="row">
+              <label for="enroll-student">Student</label>
+              <select id="enroll-student"></select>
+            </div>
+            <div class="row actions">
+              <button type="submit">Enroll Student</button>
+            </div>
+          </form>
 
-	<footer>
-		<small>Frontend calls backend at <code>http://localhost:3306@uts_eai_group5</code></small>
-	</footer>
+          <div class="row">
+            <label for="enrolled-course"
+              >View enrolled students for course</label
+            >
+            <select id="enrolled-course"></select>
+            <button id="load-enrolled" class="secondary">Load</button>
+          </div>
+          <table class="table" id="enrolled-table">
+            <thead>
+              <tr>
+                <th>Enrollment ID</th>
+                <th>Student ID</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
 
-	<script src="./app.js"></script>
-	<script>
-		window.addEventListener('DOMContentLoaded', () => {
-			window.Frontend.init();
-		});
-	</script>
-</body>
+        <section class="card">
+          <h2>Grade Student</h2>
+          <form id="grade-form" class="form">
+            <div class="row">
+              <label for="grade-course">Course</label>
+              <select id="grade-course"></select>
+            </div>
+            <div class="row">
+              <label for="grade-student">Student</label>
+              <select id="grade-student"></select>
+            </div>
+            <div class="row">
+              <label for="grade-value">Grade</label>
+              <input
+                type="text"
+                id="grade-value"
+                placeholder="e.g. A, B+, 90"
+                required
+              />
+            </div>
+            <div class="row actions">
+              <button type="submit" id="load-grade">Submit Grade</button>
+            </div>
+          </form>
+          <table class="table" id="grade-table">
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Student Email</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+      </main>
+
+      <footer>
+        <small
+          >Frontend calls backend at
+          <code>http://localhost:3000@uts_eai_group5</code></small
+        >
+      </footer>
+    </div>
+    <!-- End main-content -->
+
+    <script src="./app.js"></script>
+    <script src="./navbar.js"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        // Initialize main frontend functionality
+        if (window.Frontend) {
+          window.Frontend.init();
+        }
+      });
+    </script>
+  </body>
 </html>
-
-

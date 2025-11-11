@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses Management - EAI System</title>
+    <link rel="stylesheet" href="../navbar.css" />
+    <link rel="stylesheet" href="courses.css" />
+  </head>
+  <body>
+    <!-- 🚀 NAVBAR COMPONENT - Auto Load! -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <div class="container">
+        <h1>Available Courses</h1>
+
+        <!-- Loading indicator -->
+        <div id="loading">Loading courses...</div>
+
+        <!-- Courses Grid -->
+        <div id="courses-container" class="hidden">
+          <div id="courses-grid">
+            <!-- Course cards will be loaded here -->
+          </div>
+        </div>
+
+        <!-- Error message -->
+        <div id="error-message" class="hidden">
+          <p>Failed to load courses. Please try again later.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts for navbar component -->
+    <script src="../navbar.js"></script>
+    <script src="courses.js"></script>
+  </body>
+</html>

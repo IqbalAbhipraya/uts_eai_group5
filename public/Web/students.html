@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students Management - EAI System</title>
+    <link rel="stylesheet" href="../navbar.css" />
+    <link rel="stylesheet" href="students.css" />
+  </head>
+  <body>
+    <!-- 🚀 NAVBAR COMPONENT - Auto Load! -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <div class="container">
+        <h1>Student List</h1>
+
+        <!-- Loading indicator -->
+        <div id="loading">Loading student data...</div>
+
+        <!-- Students Table -->
+        <div id="students-container" class="hidden">
+          <table id="students-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Birth Date</th>
+                <th>Major</th>
+                <th>Enrollment Year</th>
+              </tr>
+            </thead>
+            <tbody id="students-tbody">
+              <!-- Student data will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Error message -->
+        <div id="error-message" class="hidden">
+          <p>Failed to load student data. Please try again later.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts for navbar component -->
+    <script src="../navbar.js"></script>
+    <script src="students.js"></script>
+  </body>
+</html>

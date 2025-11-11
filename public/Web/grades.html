@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grades Management - EAI System</title>
+    <link rel="stylesheet" href="../navbar.css" />
+    <link rel="stylesheet" href="grades.css" />
+  </head>
+  <body>
+    <!-- 🚀 NAVBAR COMPONENT - Auto Load! -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+      <div class="container">
+        <h1>Grade List</h1>
+
+        <!-- Course Selection -->
+        <div class="course-selector">
+          <label for="course-select">Select Course:</label>
+          <select id="course-select">
+            <option value="">-- Choose a Course --</option>
+          </select>
+          <button id="load-grades-btn" class="load-btn">Load Grades</button>
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="loading" class="hidden">Loading grade data...</div>
+
+        <!-- Grades Table -->
+        <div id="grades-container" class="hidden">
+          <table id="grades-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Grade</th>
+                <th>Course ID</th>
+              </tr>
+            </thead>
+            <tbody id="grades-tbody">
+              <!-- Grade data will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- No course selected message -->
+        <div id="no-course-message" class="message-box">
+          <p>Please select a course to view grades.</p>
+        </div>
+
+        <!-- Error message -->
+        <div id="error-message" class="hidden">
+          <p>Failed to load grade data. Please try again later.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts for navbar component -->
+    <script src="../navbar.js"></script>
+    <script src="grades.js"></script>
+  </body>
+</html>
