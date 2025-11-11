@@ -1,0 +1,328 @@
+openapi: 3.0.4
+info:
+  title: EduConnect API
+  version: 1.0.0
+  description: |-
+    EduConnect is an online learning platform built with Node.js and Express.  
+    It provides RESTful APIs for managing *Students, **Courses, and **Grades*,  
+    following microservices and EAI integration principles.
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Students
+    description: Manage student data
+  - name: Courses
+    description: Manage courses and enrolled students
+  - name: Grades
+    description: Assign and manage student grades
+
+paths:
+  /api/v1/student/:
+    get:
+      tags: [Students]
+      summary: Get all students
+      responses:
+        '200':
+          description: List of all students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+
+  /api/v1/student/add-student:
+    post:
+      tags: [Students]
+      summary: Add a new student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '201':
+          description: Student created successfully
+
+  /api/v1/student/{id}:
+    get:
+      tags: [Students]
+      summary: Get a student by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Student found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '404':
+          description: Student not found
+    delete:
+      tags: [Students]
+      summary: Delete a student by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Student deleted successfully
+
+  /api/v1/student/update-student/{id}:
+    put:
+      tags: [Students]
+      summary: Update a student by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '200':
+          description: Student updated successfully
+
+  /api/v1/course/:
+    get:
+      tags: [Courses]
+      summary: Get all courses
+      responses:
+        '200':
+          description: List of all courses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+
+  /api/v1/course/add-course:
+    post:
+      tags: [Courses]
+      summary: Add a new course
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        '201':
+          description: Course created successfully
+
+  /api/v1/course/{id}:
+    get:
+      tags: [Courses]
+      summary: Get a course by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Course found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '404':
+          description: Course not found
+    delete:
+      tags: [Courses]
+      summary: Delete a course by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Course deleted successfully
+
+  /api/v1/course/update-course/{id}:
+    put:
+      tags: [Courses]
+      summary: Update a course by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        '200':
+          description: Course updated successfully
+
+  /api/v1/course/{id}/enroll-student:
+    post:
+      tags: [Courses]
+      summary: Enroll a student in a course
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                studentId:
+                  type: integer
+                  example: 1
+      responses:
+        '201':
+          description: Student enrolled successfully
+        '400':
+          description: Invalid student or course ID
+
+  /api/v1/course/{id}/students:
+    get:
+      tags: [Courses]
+      summary: Get all students enrolled in a course
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of enrolled students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+
+  /api/v1/grade/{id}:
+    post:
+      tags: [Grades]
+      summary: Assign a grade to a student
+      description: Grade a student for a specific course.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Course ID
+          schema:
+            type: string
+        - name: studentId
+          in: query
+          required: true
+          description: ID of the student being graded
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                grade:
+                  type: string
+                  example: "A"
+      responses:
+        '201':
+          description: Grade assigned successfully
+        '400':
+          description: Missing or invalid parameters
+
+    get:
+      tags: [Grades]
+      summary: Get all grades for a course
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Course ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of grades
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grade'
+
+components:
+  schemas:
+    Student:
+      type: object
+      required: [nama, email, password]
+      properties:
+        id:
+          type: integer
+          example: 1
+        nama:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john@student.educonnect.com
+        password:
+          type: string
+          example: "password123"
+
+    Course:
+      type: object
+      required: [title, instructor]
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Enterprise Application Integration
+        instructor:
+          type: string
+          example: Dr. Smith
+
+    Grade:
+      type: object
+      required: [courseId, studentId, grade]
+      properties:
+        id:
+          type: integer
+          example: 1
+        courseId:
+          type: integer
+          example: 1
+        studentId:
+          type: integer
+          example: 1
+        grade:
+          type: string
+          example: "A"

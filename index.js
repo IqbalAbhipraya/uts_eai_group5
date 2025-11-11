@@ -4,12 +4,18 @@ const express = require('express');
 const app = express();
 const db = require('./models');
 const port = process.env.PORT || 3000;
-const cors = require('cors');
-
-app.use(cors());
+const swaggerUi = require('swagger-ui-express');
+const fs = require('fs');
+const yaml = require('yaml');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const file = fs.readFileSync('./swagger/educonnect-api.yaml', 'utf8');
+const swaggerDocument = yaml.parse(file);
+
+// Serve Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 async function testDbConnection() {
     try {
