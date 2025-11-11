@@ -3,5 +3,6 @@ const router = express.Router();
 const gradeController = require('../controllers/grade.controller');
 
 router.post('/:id', gradeController.gradeStudent);
+router.get('/:id', gradeController.getGrades);
 
 module.exports = router;

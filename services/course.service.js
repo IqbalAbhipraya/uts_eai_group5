@@ -29,7 +29,7 @@ exports.findCourseById = async (id) => {
     return course;
 };
 
-exports.updateStudent = async (id, updateData) => {
+exports.updateCourse = async (id, updateData) => {
     const [num] = await Course.update(updateData, {
         where: {id: id}
     });
@@ -42,7 +42,7 @@ exports.updateStudent = async (id, updateData) => {
     }
 };
 
-exports.deleteBook = async (id) => {
+exports.deleteCourse = async (id) => {
     const num = await Course.destroy({
         where: {id: id}
     });
@@ -74,13 +74,21 @@ exports.enrollStudent = async (courseId, studentId) => {
 }
 
 exports.getEnrolledStudent = async (courseId) => {
-    const course = await Course.findByPk(courseId);
-    if (!course) {
-        throw new Error(`Masukkan id course yang valid`); 
-    }
+  const course = await Course.findByPk(courseId);
+  if (!course) {
+    throw new Error("Masukkan id course yang valid");
+  }
 
-    const enrolled = await Enrollment.findAll({where: {courseId: courseId}});
+  const enrolled = await Enrollment.findAll({
+    where: { courseId },
+    include: [
+      {
+        model: Student,
+        attributes: ['nama']
+      },
+    ],
+  });
 
-    return enrolled;
-}
+  return enrolled;
+};
 

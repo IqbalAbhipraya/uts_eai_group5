@@ -19,3 +19,12 @@ exports.gradeStudent = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+exports.getGrades = async (req, res) => {
+    try {
+        const courseId = req.params.id; 
+        const grades = await gradeService.getGradesByCourse(courseId);
+        res.status(200).json(grades);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

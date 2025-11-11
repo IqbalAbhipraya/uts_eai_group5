@@ -75,7 +75,6 @@ exports.getEnrolled = async (req, res) => {
     try {
         const courseId = req.params.id;
         const enrolled = await courseService.getEnrolledStudent(courseId);
-
         res.status(200).json(enrolled);
     } catch (error) {
         res.status(400).json({ message: error.message });       

@@ -51,7 +51,7 @@ exports.updateStudent = async (id, updateData) => {
     }
 };
 
-exports.deleteBook = async (id) => {
+exports.deleteStudent = async (id) => {
     const num = await Student.destroy({
         where: {id: id}
     });

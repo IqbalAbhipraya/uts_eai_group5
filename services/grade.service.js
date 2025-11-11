@@ -30,3 +30,11 @@ exports.gradeStudent = async (courseId, studentId, gradeValue) => {
         return newGrade;
     }
 };
+
+exports.getGradesByCourse = async (courseId) => {
+    const grades = await Grade.findAll({
+        where: { courseId },
+        include: [{ model: Student, attributes: ['nama', 'email'] }]
+    });
+    return grades;
+}
